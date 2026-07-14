@@ -116,13 +116,25 @@ def generate_synthetic_lidar_data(output_path="synthetic_scene.bin"):
         intensity_val=0.4
     )
     points_list.append(pedestrian1)
+
+    # 장애물 3-2: 승용차 1 바로 옆에 서 있는 보행자 (Pedestrian 2 - 가깝게 배치)
+    # 승용차 1이 [15.0, 1.5]에 있고 너비가 1.8m이므로 차량의 왼쪽 끝은 y = 0.6m입니다.
+    # 보행자 2를 [15.0, -0.3]에 두고 너비를 0.6m로 설정하여 보행자의 오른쪽 끝은 y = 0.0m가 됩니다.
+    # 따라서 차량과 보행자 사이의 순수 공백 거리는 정확히 0.6m입니다.
+    pedestrian2 = generate_box_surface_points(
+        center=[15.0, -0.3, -0.88],
+        size=[0.6, 0.6, 1.7],
+        num_points=400,
+        intensity_val=0.45
+    )
+    points_list.append(pedestrian2)
     
     # 장애물 4: 도로 중앙의 큰 장애물 (예: 공사중 드럼통/안전펜스 군집)
-    # 크기: dx=1.2m, dy=1.2m, dz=1.2m
+    # 크기: dx=2.0m, dy=1.0m, dz=1.2m (주성분 분석 축 안정을 위해 직사각형으로 수정)
     # 위치: x=30m, y=-1.0m, z = -1.13
     construction_obstacle = generate_box_surface_points(
         center=[30.0, -1.0, -1.13],
-        size=[1.2, 1.2, 1.2],
+        size=[2.0, 1.0, 1.2],
         num_points=600,
         intensity_val=0.8
     )
