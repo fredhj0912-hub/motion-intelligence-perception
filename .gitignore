@@ -1,0 +1,10 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Local binary data files (prevent uploading massive point cloud files)
+*.bin
+
+# Log files
+*.log
