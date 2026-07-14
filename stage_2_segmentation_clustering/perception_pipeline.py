@@ -151,9 +151,10 @@ def save_obstacles_to_json(obstacle_list, output_path="detected_obstacles.json")
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(obstacle_list, f, indent=4, ensure_ascii=False)
     print(f"Saved obstacle data ({len(obstacle_list)} items) to {os.path.abspath(output_path)}")
-
 def main():
     bin_file = "synthetic_scene.bin"
+    if not os.path.exists(bin_file) and os.path.exists("../stage_1_raw_visualization/synthetic_scene.bin"):
+        bin_file = "../stage_1_raw_visualization/synthetic_scene.bin"
     output_json = "detected_obstacles.json"
     
     # 파이프라인 매개변수 설정
